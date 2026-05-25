@@ -11,6 +11,9 @@ public class LoginPage extends BasePage {
   By submit = By.cssSelector("[data-testid='login-submit']");
 
   // actions
+  public void open(){
+     driver.get("http://localhost:5173/login");
+  }
   public void loginAs(String email, String password){
     type(emailInput, email);
     type(passwordInput, password);
