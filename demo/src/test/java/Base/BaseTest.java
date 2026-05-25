@@ -16,7 +16,7 @@ public class BaseTest {
     loginPage.waitUrlContains("/dashboard");
   }
   @AfterMethod
-  void quit(){
+  public void quit(){
     DriverManager.quitDriver();
   }
 }
