@@ -12,6 +12,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.utils.DriverManager;
 
 public abstract class BasePage {
+
+  private By toastTitle = By.cssSelector("[data-sonner-toast] [data-title]");
+  private By toastDescription = By.cssSelector("[data-sonner-toast] [data-description]");
+
   protected WebDriver driver;
   protected WebDriverWait wait;
   public BasePage(){
@@ -42,5 +46,12 @@ public abstract class BasePage {
   }
   public boolean areAllDisplayed(List<WebElement> elements){
     return elements.stream().allMatch(WebElement::isDisplayed);
+  }
+  public String getToastTitle() {
+    return waitFor(toastTitle).getText();
+  }
+
+  public String getToastDescription() {
+    return waitFor(toastDescription).getText();
   }
 }

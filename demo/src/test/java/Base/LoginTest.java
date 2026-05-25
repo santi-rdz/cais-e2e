@@ -26,6 +26,10 @@ public class LoginTest {
     loginPage.waitUrlContains("/dashboard");
     Assert.assertTrue(loginPage.getCurrentUrl().contains("/dashboard"));
   }
-
+  @Test(description = "login with invalid credentials")
+  public void loginFail(){
+    loginPage.loginAs("sofia.navarro", "invalidpass");
+    Assert.assertEquals(loginPage.getToastDescription(), "Verifica tus credenciales e inténtalo de nuevo.");
+  }
 
 }
