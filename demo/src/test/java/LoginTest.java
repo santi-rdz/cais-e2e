@@ -48,5 +48,10 @@ public class LoginTest {
     loginPage.waitUrlContains("/login");
     Assert.assertTrue(loginPage.getCurrentUrl().contains("/login"));
   }
+  // ui
+  @Test(description = "Se muestra el titulo de login correctamente")
+  public void titleIsDisplayed(){
+    Assert.assertTrue(loginPage.isTitleDisplayed());
+  }
 
 }

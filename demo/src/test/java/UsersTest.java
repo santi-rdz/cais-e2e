@@ -33,4 +33,9 @@ public class UsersTest extends BaseTest{
     usersPage.toggleUserStatus("carlos.herrera@cais.com");
     Assert.assertEquals(usersPage.getToastTitle(), "Usuario desactivado");
   }
+  // UI
+  @Test(description = "Se muestra correctamente el titulo de pagina /usuarios")
+  public void titleIsDisplayed(){
+    Assert.assertTrue(usersPage.isTitleDisplayed());
+  }
 }
