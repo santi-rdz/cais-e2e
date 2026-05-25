@@ -28,7 +28,7 @@ public class UsersPage extends BasePage{
   By modalPrimaryBtn = By.cssSelector("[data-testid='modal-primary-btn']");
   By toggleEstadoBtn = By.cssSelector("[data-testid='toggle-estado-btn']");
   By confirmActionBtn = By.cssSelector("[data-testid='confirm-action-btn']");
-
+  By pageTitle = By.cssSelector("[data-testid='page-title-users']");
   // actions
   public void open(){
     driver.get("http://localhost:5173/usuarios");
@@ -64,4 +64,8 @@ public class UsersPage extends BasePage{
     click(toggleEstadoBtn);
     click(confirmActionBtn);
   }
+  public boolean isTitleDisplayed(){
+    return waitFor(pageTitle).isDisplayed();
+  }
+
 }

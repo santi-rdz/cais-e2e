@@ -11,6 +11,7 @@ public class LoginPage extends BasePage {
   By submit = By.cssSelector("[data-testid='login-submit']");
   By profileCard = By.cssSelector("[data-testid='profile-card-btn']");
   By logoutBtn = By.cssSelector("[data-testid='logout-btn']");
+  By authTitle = By.cssSelector("[data-testid='page-title-auth']");
   // actions
   public void open(){
      driver.get("http://localhost:5173/login");
@@ -23,5 +24,8 @@ public class LoginPage extends BasePage {
   public void logout(){
     hover(profileCard);
     waitFor(logoutBtn).click();
+  }
+  public boolean isTitleDisplayed(){
+    return waitFor(authTitle).isDisplayed();
   }
 }
