@@ -6,6 +6,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -34,6 +35,10 @@ public abstract class BasePage {
   }
   public void type(By locator, String text){
     waitFor(locator).sendKeys(text);
+  }
+  public void hover(By locator) {
+    WebElement element = waitFor(locator);
+    new Actions(driver).moveToElement(element).perform();
   }
   public String getText(By locator, String text){
     return waitFor(locator).getText();
