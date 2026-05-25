@@ -8,7 +8,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class DriverManager{
   private static WebDriver driver;
 
-  public WebDriver getDriver(){
+  public static WebDriver getDriver(){
     if(driver == null){
       WebDriverManager.chromedriver().setup();
       driver = new ChromeDriver();
@@ -16,7 +16,7 @@ public class DriverManager{
     return driver;
   }
 
-  public void quitDriver(){
+  public static void quitDriver(){
     if(driver != null){
       driver.quit();
       driver = null;
