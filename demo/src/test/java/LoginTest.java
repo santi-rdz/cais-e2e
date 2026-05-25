@@ -27,10 +27,15 @@ public class LoginTest {
     loginPage.waitUrlContains("/dashboard");
     Assert.assertTrue(loginPage.getCurrentUrl().contains("/dashboard"));
   }
-  @Test(description = "login with invalid credentials")
-  public void loginFail(){
+  @Test(description = "login with invalid password")
+  public void loginInvalidPassword(){
     loginPage.loginAs("sofia.navarro", "invalidpass");
-    Assert.assertEquals(loginPage.getToastDescription(), "Verifica tus credenciales e inténtalo de nuevo.");
+    Assert.assertEquals(loginPage.getToastTitle(), "Contraseña inválida");
+  }
+  @Test(description = "login with not registered email")
+  public void loginNoEmailFound(){
+    loginPage.loginAs("noemail", "123");
+    Assert.assertEquals(loginPage.getToastTitle(), "Correo electronico no encontrado");
   }
   @Test(description = "Hacer logout y validar que permanece en /login al intetnar entrar a rutas protegidas")
   public void logout(){
