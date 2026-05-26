@@ -70,14 +70,17 @@ public abstract class BasePage {
         return waitFor(toastTitle).getText();
     }
 
-    public String getToastDescription() {
-        return waitFor(toastDescription).getText();
-    }
+  public void clearTextField(By locator){
+    waitFor(locator).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+  }
 
-    public void selectFrom(By select, String text) {
-        hover(select);
-        String testId = driver.findElement(select).getAttribute("data-testid");
-        By option = By.xpath("//button[@data-testid='" + testId + "']/following-sibling::div//button[.//span[text()='" + text + "']]");
-        waitFor(option).click();
-    }
+  public String getToastDescription() {
+    return waitFor(toastDescription).getText();
+  }
+  public void selectFrom(By select, String text) {
+    hover(select);
+    String testId = driver.findElement(select).getAttribute("data-testid");
+    By option = By.xpath("//button[@data-testid='" + testId + "']/following-sibling::div//button[.//span[text()='" + text + "']]");
+    waitFor(option).click();
+  }
 }
