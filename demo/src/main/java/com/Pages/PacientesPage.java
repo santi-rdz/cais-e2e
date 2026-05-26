@@ -9,6 +9,10 @@ public class PacientesPage extends BasePage {
 
     By pacientesNavLink = By.cssSelector("a[href='/pacientes']");
     By nuevoPacienteButton = By.xpath("/html/body/div/div[2]/header/div[4]/button");
+    By sortDropDown = By.xpath("/html/body/div/div[2]/main/div/div[1]/div[3]/button");
+    By oldestToYoungestSortOption = By.xpath("/html/body/div/div[2]/main/div/div[1]/div[3]/div/div[3]/button[1]");
+    By filterDropDown = By.xpath("/html/body/div/div[2]/main/div/div[1]/div[2]/button");
+    By masculineFilterOption = By.xpath("/html/body/div/div[2]/main/div/div[1]/div[2]/div/div[1]/button[1]");
 
     By modalTitle = By.xpath("/html/body/div[3]/div/div[2]/div/header/h2/span");
 
@@ -23,6 +27,10 @@ public class PacientesPage extends BasePage {
 
     String patientRowByNameXpath = "(//div[starts-with(@data-testid, 'patient-row-')][.//span[@title=\"%s\"]])[1]";
     By patientSearchBox = By.cssSelector("input[data-testid='patients-search']");
+    By noDataMessage = By.xpath("/html/body/div/div[2]/main/div/div[2]/div/div[2]/span[2]");
+    By firstPatientAge = By.xpath("/html/body/div/div[2]/main/div/div[2]/div/div[2]/div[1]/div[3]/span[2]");
+    By secondPatientAge = By.xpath("/html/body/div/div[2]/main/div/div[2]/div/div[2]/div[2]/div[3]/span[2]");
+    By firstPatientGender = By.xpath("/html/body/div/div[2]/main/div/div[2]/div/div[2]/div[1]/div[4]");
 
     // actions
     public void openFromSidebar() {
@@ -92,5 +100,40 @@ public class PacientesPage extends BasePage {
 
     public void searchForPatient(String name) {
         enterPatientToSearch(name);
+    }
+
+    public boolean isNoDataVisible() {
+        try {
+            waitFor(noDataMessage);
+            return true;
+        } catch (org.openqa.selenium.TimeoutException e) {
+            return false;
+        }
+    }
+
+    public void selectSortByOldestToYoungest() {
+        click(sortDropDown);
+        click(oldestToYoungestSortOption);
+    }
+
+    public boolean isSortedOldestToYoungest() {
+        return (getAgeFirstPatientOnList() >= getAgeSecondPatientOnList());
+    }
+
+    private int getAgeFirstPatientOnList() {
+        return Integer.parseInt(getText(firstPatientAge).split(" ")[0]);
+    }
+
+    private int getAgeSecondPatientOnList() {
+        return Integer.parseInt(getText(secondPatientAge).split(" ")[0]);
+    }
+
+    public void seletcFilterByMasculine() {
+        click(filterDropDown);
+        click(masculineFilterOption);
+    }
+
+    public boolean isShownOnlyMasculine() {
+        return getText(firstPatientGender).equals("Masculino");
     }
 }
