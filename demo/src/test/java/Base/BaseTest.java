@@ -15,6 +15,7 @@ public class BaseTest {
     loginPage.loginAs("sofia.navarro", "123");
     loginPage.waitUrlContains("/dashboard");
   }
+  
   @AfterMethod
   void quit(){
     DriverManager.quitDriver();

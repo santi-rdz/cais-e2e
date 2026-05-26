@@ -35,8 +35,11 @@ public abstract class BasePage {
   public void type(By locator, String text){
     waitFor(locator).sendKeys(text);
   }
-  public String getText(By locator, String text){
+  public String getText(By locator){
     return waitFor(locator).getText();
+  }
+  public void clear(By locator){
+    waitFor(locator).clear();
   }
   public String getCurrentUrl(){
     return driver.getCurrentUrl();
@@ -50,7 +53,6 @@ public abstract class BasePage {
   public String getToastTitle() {
     return waitFor(toastTitle).getText();
   }
-
   public String getToastDescription() {
     return waitFor(toastDescription).getText();
   }
