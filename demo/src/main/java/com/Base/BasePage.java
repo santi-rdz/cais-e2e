@@ -3,9 +3,7 @@ package com.Base;
 import java.time.Duration;
 import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -54,6 +52,10 @@ public abstract class BasePage {
   }
   public String getToastTitle() {
     return waitFor(toastTitle).getText();
+  }
+
+  public void clearTextField(By locator){
+    waitFor(locator).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
   }
 
   public String getToastDescription() {
