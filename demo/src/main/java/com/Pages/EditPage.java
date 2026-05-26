@@ -30,6 +30,7 @@ public class EditPage extends BasePage {
     }
 
     public void enterTelephoneNumber(String n) {
+        clear(telephoneNumberField);
         type(telephoneNumberField, n);
     }
 
@@ -45,6 +46,6 @@ public class EditPage extends BasePage {
     }
 
     public String getInfoTelephoneNumber() {
-        return getText(patientTelephoneNumberInfo);
+        return waitFor(patientTelephoneNumberInfo).getText();
     }
 }

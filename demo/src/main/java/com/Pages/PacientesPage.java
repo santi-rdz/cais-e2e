@@ -1,7 +1,6 @@
 package com.Pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.Base.BasePage;
 
@@ -20,7 +19,7 @@ public class PacientesPage extends BasePage {
     By genderDropDown = By.xpath("/html/body/div[3]/div/div[2]/div/div[1]/form/div/div[1]/div[2]/div[3]/div/button");
     By otherGenderOption = By.xpath("/html/body/div[3]/div/div[2]/div/div[1]/form/div/div[1]/div[2]/div[3]/div/div/button[3]");
     By nextButton = By.xpath("//button[normalize-space()='Siguiente']");
-    By savePatientButton = By.xpath("button[data-testid='modal-primary-btn']");
+    By savePatientButton = By.cssSelector("button[data-testid='modal-primary-btn']");
     
     String patientRowByNameXpath = "(//div[starts-with(@data-testid, 'patient-row-')][.//span[@title=\"%s\"]])[1]";
 
@@ -67,14 +66,19 @@ public class PacientesPage extends BasePage {
         selectOtherGenderOption();
 
         for (int i = 0; i < 6; i++) {
-            wait.until(ExpectedConditions.elementToBeClickable(nextButton)).click();
+            waitFor(nextButton).click();
         }
 
         click(savePatientButton);
     }
 
     public boolean isNewPatientOnPatientList(String fullName) {
-        return (!driver.findElements(By.xpath("//*[text()='" + fullName + "']")).isEmpty());        
+        try {
+            waitFor(By.xpath(String.format(patientRowByNameXpath, fullName)));
+            return true;
+        } catch (org.openqa.selenium.TimeoutException e) {
+            return false;
+        }
     }
 
     public void openFirstPatientByName(String fullName) {
