@@ -28,7 +28,7 @@ public class PacientesTest extends BaseTest {
     }
 
     @Test(description = "edit patient data")
-    public void editPatientData() throws InterruptedException {
+    public void editPatientData() {
         pacientesPage = new PacientesPage();
         pacientesPage.openFromSidebar();
         Assert.assertTrue(pacientesPage.getCurrentUrl().contains("/pacientes"));
@@ -40,5 +40,14 @@ public class PacientesTest extends BaseTest {
         Assert.assertEquals(editPage.getModalTitle(), "Editar Info del Paciente");
         editPage.editInfo(testEditedTelephoneNumber, "juanperez@mail.com");
         Assert.assertEquals(editPage.getInfoTelephoneNumber(), testEditedTelephoneNumber);
+    }
+
+    @Test(description = "search for a specific patient")
+    public void searchForPatient() {
+        pacientesPage = new PacientesPage();
+        pacientesPage.openFromSidebar();
+        Assert.assertTrue(pacientesPage.getCurrentUrl().contains("/pacientes"));
+        pacientesPage.searchForPatient(testName);
+        Assert.assertTrue(pacientesPage.isNewPatientOnPatientList(fullName));
     }
 }

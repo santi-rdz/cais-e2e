@@ -20,8 +20,9 @@ public class PacientesPage extends BasePage {
     By otherGenderOption = By.xpath("/html/body/div[3]/div/div[2]/div/div[1]/form/div/div[1]/div[2]/div[3]/div/div/button[3]");
     By nextButton = By.xpath("//button[normalize-space()='Siguiente']");
     By savePatientButton = By.cssSelector("button[data-testid='modal-primary-btn']");
-    
+
     String patientRowByNameXpath = "(//div[starts-with(@data-testid, 'patient-row-')][.//span[@title=\"%s\"]])[1]";
+    By patientSearchBox = By.cssSelector("input[data-testid='patients-search']");
 
     // actions
     public void openFromSidebar() {
@@ -83,5 +84,13 @@ public class PacientesPage extends BasePage {
 
     public void openFirstPatientByName(String fullName) {
         click(By.xpath(String.format(patientRowByNameXpath, fullName)));
+    }
+
+    public void enterPatientToSearch(String n) {
+        type(patientSearchBox, n);
+    }
+
+    public void searchForPatient(String name) {
+        enterPatientToSearch(name);
     }
 }
