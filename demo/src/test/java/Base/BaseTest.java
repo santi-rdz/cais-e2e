@@ -17,7 +17,7 @@ public class BaseTest {
   }
   
   @AfterMethod
-  void quit(){
+  public void quit(){
     DriverManager.quitDriver();
   }
 }
